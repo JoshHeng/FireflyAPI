@@ -2,9 +2,10 @@
   "name": "firefly-api",
   "version": "1.0.0",
   "description": "An unofficial API for the Firefly VLE",
-  "main": "base.js",
+  "main": "misc.js",
   "dependencies": {
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "xml2js": "^0.4.22"
   },
   "devDependencies": {},
   "scripts": {
