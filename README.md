@@ -6,9 +6,5 @@ Please see the [wiki](https://github.com/JoshHeng/Firefly-API/wiki) for detailed
 
 ## environment.json
 You will need to configure `environment.json` with your own environment data. You can copy `environment.example.json` to do this.
-```json
-{
-    "schoolCode": "SCHOOLCODE", //This is the code for the school which is provided by your school. It is needed to determine the host for all other requests, and is used within the mobile app to login.
-    "host": "https://host.fireflycloud.net" //This is the base API endpoint which is generally the main page of the Firefly instance. This can be obtained by a school code by submitting an API request - please see the misc section for details.
-}
-```
+* `"schoolCode": "SCHOOLCODE"` This is the code for the school which is provided by your school. It is needed to determine the host for all other requests, and is used within the mobile app to login.
+* `"host": "https://host.fireflycloud.net"` This is the base API endpoint which is generally the main page of the Firefly instance. This can be obtained by a school code by submitting an API request - please see the misc section for details.
