@@ -1,0 +1,23 @@
+{
+  "name": "firefly-api",
+  "version": "1.0.0",
+  "description": "An unofficial API for the Firefly VLE",
+  "main": "base.js",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshHeng/Firefly-API.git"
+  },
+  "author": "Josh Heng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshHeng/Firefly-API/issues"
+  },
+  "homepage": "https://github.com/JoshHeng/Firefly-API#readme"
+}
