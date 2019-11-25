@@ -3,3 +3,5 @@
 #Node modules
 Examples/node_modules
 Examples/environment.json
+
+Examples/test.js

@@ -1,4 +1,7 @@
 {
     "schoolCode": "SCHOOLCODE",
-    "host": "https://host.fireflycloud.net"
+    "host": "https://host.fireflycloud.net",
+
+    "deviceID": "DEVICE-ID-001",
+    "secret": "rAnDoM-sEcReT-0123456-789"
 }
