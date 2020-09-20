@@ -19,9 +19,19 @@ async function test() {
 
 	//console.log(await instance.verifyCredentials());
 
-	// Get events
-	let finalDate = new Date();
-	finalDate.setFullYear(2021);
-	console.log(await instance.getEvents(new Date(), finalDate));
+	// Events/timetable
+	//let finalDate = new Date();
+	//finalDate.setFullYear(2021);
+	//console.log(await instance.getEvents(new Date(), finalDate));
+
+	// Messages
+	//console.log(await instance.messages);
+
+	// Bookmarks
+	//console.log(await instance.bookmarks);
+
+	// Groups
+	//console.log(await instance.groups);
 }
+
 test();

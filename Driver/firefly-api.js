@@ -124,6 +124,89 @@ class Firefly {
 		return axios.post(this.host + `/_api/1.0/graphql?ffauth_device_id=${this.deviceId}&ffauth_secret=${this.secret}`, 'data='+encodeURIComponent(query), { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
 	}
 
+	// Get app configuration
+	get configuration() {
+		if (!this.user) throw 'Not authenticated';
+
+		return new Promise((resolve, reject) => {
+			this.graphQuery(`query Query {
+				configuration {
+					week_start_day, weekend_days, native_app_capabilities, notice_group_guid 
+				}
+			}`)
+			.then(response => resolve(response.data.data.configuration))
+			.catch(err => reject(err));
+		});
+	}
+
+	// Get styles
+	get appStyles() {
+		if (!this.user) throw 'Not authenticated';
+
+		return new Promise((resolve, reject) => {
+			this.graphQuery(`query Query {
+				app_styles {
+					value, name, type, file 
+				}
+			}`)
+			.then(response => resolve(response.data.data.app_styles))
+			.catch(err => reject(err));
+		});
+	}
+
+	// Get general data
+	get bookmarks() {
+		if (!this.user) throw 'Not authenticated';
+
+		return new Promise((resolve, reject) => {
+			this.graphQuery(`query Query {
+				users(guid: "${this.user.guid}") {
+					bookmarks {
+						simple_url, deletable, position, read, from {
+							guid, name 
+						}, type, title, is_form, form_answered, breadcrumb, guid, created 
+					}
+				}
+			}`)
+			.then(response => resolve(response.data.data.users[0].messages))
+			.catch(err => reject(err));
+		});
+	}
+	get messages() {
+		if (!this.user) throw 'Not authenticated';
+
+		return new Promise((resolve, reject) => {
+			this.graphQuery(`query Query {
+				users(guid: "${this.user.guid}") {
+					messages {
+						from {
+							guid, name 
+						}, sent, archived, id, single_to {
+							guid, name 
+						}, all_recipients, read, body 
+					}
+				}
+			}`)
+			.then(response => resolve(response.data.data.users[0].messages))
+			.catch(err => reject(err));
+		});
+	}
+	get groups() {
+		if (!this.user) throw 'Not authenticated';
+
+		return new Promise((resolve, reject) => {
+			this.graphQuery(`query Query {
+				users(guid: "${this.user.guid}") {
+					participating_in {
+						guid, sort_key, name, personal_colour 
+					}
+				}
+			}`)
+			.then(response => resolve(response.data.data.users[0].participating_in))
+			.catch(err => reject(err));
+		});
+	}
+
 	// Get events
 	getEvents(start, end) {
 		if (!this.user) throw 'Not authenticated';
