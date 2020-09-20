@@ -1,0 +1,32 @@
+{
+  "name": "firefly-api",
+  "version": "1.0.0",
+  "description": "A Node.JS API driver for the Firefly Schools Virtual Learning Environment",
+  "main": "firefly-api.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshHeng/FireflyAPI.git"
+  },
+  "keywords": [
+    "firefly",
+    "vle",
+    "schools",
+    "api",
+    "driver",
+    "fireflycloud"
+  ],
+  "author": "Josh Heng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshHeng/FireflyAPI/issues"
+  },
+  "homepage": "https://github.com/JoshHeng/FireflyAPI#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "fast-xml-parser": "^3.17.4"
+  }
+}
