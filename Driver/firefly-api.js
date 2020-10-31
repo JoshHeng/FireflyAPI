@@ -16,8 +16,9 @@ class Firefly {
 	}
 
 	// Get a school from a code
-	static getHost(code) {
+	static getHost(code, appId = 'Firefly Node.JS Driver', deviceId = null) {
 		if (!code) throw 'Invalid code';
+		if (!deviceId) deviceId = uuidv4();
 
 		return new Promise((resolve, reject) => {
 			axios.get('https://appgateway.fireflysolutions.co.uk/appgateway/school/' + code)
@@ -29,12 +30,20 @@ class Firefly {
 
 				if ((!response.response) || response.response['@_exists'] === 'false') return resolve(null);
 
+				let host = response.response.address['#text'];
+				let ssl = response.response.address['@_ssl'] === 'true';
+				let url = (ssl ? 'https://' : 'http://') + host;
+				let tokenUrl = encodeURIComponent(`${url}/Login/api/gettoken?ffauth_device_id=${deviceId}&ffauth_secret=&device_id=${deviceId}&app_id=${appId}`);
+
 				return resolve({
 					enabled: response.response['@_enabled'] === 'true',
 					name: response.response.name,
 					id: response.response.installationId,
-					host: response.response.address['#text'],
-					ssl: response.response.address['@_ssl'] === 'true'
+					host: host,
+					ssl: ssl,
+					url: url,
+					tokenUrl: `${url}/login/login.aspx?prelogin=${tokenUrl}`,
+					deviceId: deviceId
 				});
 			})
 			.catch(error => reject(error));
@@ -221,6 +230,39 @@ class Firefly {
 			.catch(err => reject(err));
 		});
 	}
+
+	//Import & export as json
+	get export() {
+		return JSON.stringify({
+			deviceId: this.deviceId,
+			secret: this.secret,
+			user: this.user,
+			classes: this.classes,
+		});
+	}
+	import(json) {
+		if (!json) throw 'Invalid JSON';
+
+		try {
+			json = JSON.parse(json);
+		}
+		catch(err) {
+			throw 'Invalid JSON';
+		}
+
+		if (!json.deviceId) throw 'No device ID';
+		if (!json.secret) throw 'No secret';
+		if (!json.user) throw 'No user'
+		if (!json.classes) throw 'No classes';
+
+		this.deviceId = json.deviceId;
+		this.secret = json.secret;
+		this.user = json.user;
+		this.classes = json.classes;
+
+		return true;
+	}
+
 }
 
 module.exports = Firefly;
