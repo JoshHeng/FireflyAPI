@@ -27,7 +27,7 @@
   "dependencies": {
     "axios": "^0.21.2",
     "dotenv": "^8.2.0",
-    "fast-xml-parser": "^4.2.4",
+    "fast-xml-parser": "^4.2.5",
     "uuid": "^8.3.0"
   }
 }
